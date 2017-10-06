@@ -72,7 +72,8 @@ class Order(models.Model):
             custom_values = {}
 
         # find or create customer
-        email, name = email_split(msg_dict.get('email_from', False))
+        email = email_split(msg_dict.get('email_from', False))[0]
+        name = email_split_and_format(msg_dict.get('email_from', False))[0]
         customer = self.env['plant.customer'].find_or_create(email, name)
 
         # happy Xmas
